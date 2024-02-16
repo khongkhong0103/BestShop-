@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
+using System.Data.SqlClient;
 
 namespace BestShop.Pages
 {
@@ -62,6 +63,34 @@ namespace BestShop.Pages
                 return;
             }
             // add this message to the database
+            try
+            {
+                string connectString = "Data Source=DESKTOP-3CSJ4C0\\MSSQL;Initial Catalog=bestshop;Integrated Security=True";
+                using (SqlConnection connection = new SqlConnection(connectString))
+                {
+                    connection.Open();
+                    string sql = "INSERT INTO messages" +
+                        "(firstname, lastname, email, phone, subject, message) VALUES" +
+                        "(@firstname, @lastname, @email, @phone, @subject, @message);";
+					using (SqlCommand command = new SqlCommand(sql, connection))
+					{
+                        command.Parameters.AddWithValue("@firstname", FirstName);
+                        command.Parameters.AddWithValue("@lastname", LastName);
+                        command.Parameters.AddWithValue("@email", Email);
+                        command.Parameters.AddWithValue("@phone", Phone);
+                        command.Parameters.AddWithValue("@subject", Subject);
+                        command.Parameters.AddWithValue("@message", Message);
+
+                        command.ExecuteNonQuery();
+					};
+				}
+            
+            }
+            catch(Exception ex)
+            {
+                ErrorMessage = ex.Message;
+                return;
+            }
             // send confirmation email tho the client 
             if (Phone == null) Phone = "";
 
