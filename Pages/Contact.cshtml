@@ -21,79 +21,52 @@
 		
 		<form method="post">
 			 <div class="row mb-3">
-				 <label class="col-sm-4 col-form-label">First name* </label>
+				 <label class="col-sm-4 col-form-label" asp-for="FirstName"></label>
 				 <div class="col-sm-8">
-					 <input class="form-control" type="text" name="firstname" value="@Model.FirstName"/>
+					 <input class="form-control" asp-for="FirstName"/>
+					 <span asp-validation-for="FirstName" class="text-danger"></span>
 				 </div>
 			 </div>
 
 			<div class="row mb-3">
-				<label class="col-sm-4 col-form-label">Last name* </label>
+				<label class="col-sm-4 col-form-label" asp-for="LastName"></label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="lastname" value="@Model.LastName" />
+					<input class="form-control" asp-for="LastName" />
+					<span asp-validation-for="LastName" class="text-danger"></span>
 				</div>
 			</div>
 
 			<div class="row mb-3">
-				<label class="col-sm-4 col-form-label">Email* </label>
+				<label class="col-sm-4 col-form-label" asp-for="Email"></label>
 				<div class="col-sm-8">
-					<input class="form-control" type="email" name="email" value="@Model.Email" />
+					<input class="form-control" asp-for="Email" />
+					<span asp-validation-for="Email" class="text-danger"></span>
 				</div>
 			</div>
 
 			<div class="row mb-3">
-				<label class="col-sm-4 col-form-label">Phone* </label>
+				<label class="col-sm-4 col-form-label" asp-for="Phone"> </label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="phone" value="@Model.Phone" />
+					<input class="form-control" asp-for="Phone" />
+					<span asp-validation-for="Phone" class="text-danger"></span>
 				</div>
 			</div>
 
 			<div class="row mb-3">
-				<label class="col-sm-4 col-form-label">Subject* </label>
+				<label class="col-sm-4 col-form-label" asp-for="Subject"> </label>
 				<div class="col-sm-8">
-					<select class="form-select" name="subject">
-						@if (Model.Subject.Equals("Order Status"))
-						{
-							<option value="Order Status" selected>Order Status</option>
-
-						}
-						else{
-							<option value="Order Status">Order Status</option>
-						}
-						@if (Model.Subject.Equals("Refund Request"))
-						{
-							<option value="Refund Request" selected>Refund Request</option>
-
-						}else
-						{
-							<option value="Refund Request">Refund Request</option>
-						}
-						@if (Model.Subject.Equals("Job Application")){ 
-							<option value="Job Application" selected>Job Application</option>
-
-						}
-						else
-						{
-							<option value="Job Application">Job Application</option>
-						}
-						@if (Model.Subject.Equals("Other"))
-						{
-							<option value="Other" selected>Other</option>
-
-						}
-						else
-						{
-							<option value="Other">Other</option>
-
-						}
+					<select class="form-select" asp-for="Subject" asp-items="Model.SubjectList">
+						
 					</select>
+					<span asp-validation-for="Subject" class="text-danger"></span>
 				</div>
 			</div>
 
 			<div class="row mb-3">
-				<label class="col-sm-4 col-form-label">Message* </label>
+				<label class="col-sm-4 col-form-label" asp-for="Message"></label>
 				<div class="col-sm-8">
-					<textarea class="form-control" type="text" name="message" value="" >@Model.Message</textarea>
+					<textarea class="form-control" type="text" asp-for="Message"> </textarea>
+					<span class="text-danger" asp-validation-for="Message"></span>
 				</div>
 			</div>
 
