@@ -1,3 +1,4 @@
+using BestShop.MyHelpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -92,8 +93,14 @@ namespace BestShop.Pages
                 return;
             }
             // send confirmation email tho the client 
-            if (Phone == null) Phone = "";
-
+            string username = FirstName + " " + LastName;
+            string emailSubject = "About your message";
+            string emailMessage = "Dear "+ username+" \n"+
+                "We received your message. Thank you for contacting us. \n" +
+                "Our team will contact you very soon.\n" +
+                "Best Regards\n\n" +
+                "Your Message:\n" + Message;
+            EmailSender.SendEmail(Email, username, emailSubject, emailMessage).Wait();
             SuccessMessage = "Your message has been received correctly";
             FirstName = "";
             LastName = "";
