@@ -1,0 +1,36 @@
+﻿@page
+@model BestShop.Pages.Admin.Messages.IndexModel
+@{
+}
+<br />
+<h2>Received Messages</h2>
+<table class="table">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Username</th>
+			<th>Email</th>
+			<th>Phone</th>
+			<th>Subject</th>
+			<th>Created At</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var item in Model.listMeassages)
+		{
+			<tr>
+				<td>@item.Id</td>
+				<td>@item.FirstName @item.LastName</td>
+				<td>@item.Email</td>
+				<td>@item.Phone</td>
+				<td>@item.Subject</td>
+				<td>@item.CreateAt</td>
+				<td style="white-space:nowrap">
+					<a class="btn btn-primary btn-sm" href="/Admin/Messages/Details?id=@item.Id">Details</a>
+					<a class="btn btn-danger btn-sm" href="/Admin/Messages/Delete?id=@item.Id">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
