@@ -1,0 +1,25 @@
+﻿@page
+@using System.Data.SqlClient;
+@{
+	string id = Request.Query["id"];
+	try
+	{
+		string connectionString = "Data Source=DESKTOP-3CSJ4C0\\MSSQL;Initial Catalog=bestshop;Integrated Security=True";
+		using (SqlConnection connection = new SqlConnection(connectionString) )
+		{
+			connection.Open();
+			string sql = "DELETE FROM messages WHERE  id =@id";
+
+			using (SqlCommand commd = new SqlCommand(sql, connection))
+			{
+				commd.Parameters.AddWithValue("@id", id);
+				commd.ExecuteNonQuery();
+			}
+		}
+	}
+	catch(Exception ex)
+	{
+		Console.WriteLine(ex.Message);
+	}
+	Response.Redirect("/Admin/Messages/Index");
+}
