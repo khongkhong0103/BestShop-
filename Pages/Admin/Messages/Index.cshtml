@@ -34,3 +34,30 @@
 		}
 	</tbody>
 </table>
+@if (Model.totalPages < 10) {
+	<nav >
+		<ul class="pagination">
+			@for (int i = 1; i <= Model.totalPages; i++)
+			{
+				<li class="page-item"><a class="page-link" href="?page=@i">@i</a></li>
+			}
+		</ul>
+	</nav>
+}
+else
+{
+	<form >
+		<label>Page</label>
+		<select name="page" onchange="this.form.submit()">
+			@for (int i  = 1; i <= Model.totalPages; i++)
+			{
+				@if (i == Model.page)
+				{
+					<option value="@i" selected>@i</option>
+				}
+				else
+				{ <option value="@i">@i</option>}
+			}
+		</select>
+	</form>
+}
