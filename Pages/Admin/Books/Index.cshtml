@@ -7,6 +7,12 @@
 	<div class="col">
 		<a class="btn btn-primary" href="/Admin/Books/Create">New Book</a>
 	</div>
+	<div class="col">
+		<form class="d-flex" role="search">
+			<input class="form-control me-2" type="search" name="search" value="@Model.search" placeholder="Search by title or author" >
+			<button class="btn btn-outline-success" type="submit">Search</button> 
+		</form>
+	</div>
 </div>
 <table class="table">
 	<thead>

@@ -7,19 +7,29 @@ namespace BestShop.Pages.Admin.Books
     public class IndexModel : PageModel
     {
         public List<BookInfo> listBooks = new List<BookInfo>();
-
+        public string search = "";
+        
         public void OnGet()
         {
+            search  = Request.Query["search"];
+            if (search == null) search = "";
             try
             {
 				string connectionString = "Data Source=DESKTOP-3CSJ4C0\\MSSQL;Initial Catalog=bestshop;Integrated Security=True";
 			    using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string sql = "SELECT * FROM books ORDER BY id DESC";
-
-                    using(SqlCommand command = new SqlCommand(sql, connection))
+                    string sql = "SELECT * FROM books";
+                    if(search.Length > 0)
                     {
+                        sql += " WHERE title LIKE @search OR authors LIKE @search";
+                    }
+                    sql += " ORDER BY id DESC";
+
+
+					using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@search", "%" + search + "%");
                        using(SqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
