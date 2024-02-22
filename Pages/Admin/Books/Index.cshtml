@@ -48,3 +48,12 @@
 		}
 	</tbody>
 </table>
+
+<nav >
+	<ul class="pagination">
+		@for (int i = 1; i <= Model.totalPages; i++)
+		{
+			<li class="page-item"><a class="page-link" href="?page=@(i)&search=@(Model.search)">@i</a></li>
+		}
+	</ul>
+</nav>
