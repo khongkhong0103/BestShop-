@@ -14,17 +14,32 @@
 		</form>
 	</div>
 </div>
+
+<script>
+	function sortTable(column) {
+		let order = "desc";
+		let currentColumn= "@Model.column";
+		let currentOrder = "@Model.order";
+		if (column == currentColumn) {
+			if (currentOrder == "asc") order = "desc";
+			else order = "asc";
+		}
+		window.location.href = '?search=@Model.search&column=' + column + '&order=' + order;
+
+	}
+
+</script>
 <table class="table">
 	<thead>
 		<tr>
-			<th>ID</th>
-			<th>Title</th>
-			<th>Authors</th>
-			<th>Pages</th>
-			<th>Price</th>
-			<th>Category</th>
+			<th style="cursor:pointer;" onclick="sortTable('id')">ID</th>
+			<th style="cursor:pointer;" onclick="sortTable('title')">Title</th>
+			<th style="cursor:pointer;" onclick="sortTable('authors')">Authors</th>
+			<th style="cursor:pointer;" onclick="sortTable('num_pages')">Pages</th>
+			<th style="cursor:pointer;" onclick="sortTable('price')">Price</th>
+			<th style="cursor:pointer;" onclick="sortTable('category')">Category</th>
 			<th>Image</th>
-			<th>Created At</th>
+			<th style="cursor:pointer;" onclick="sortTable('created_at')">Created At</th>
 			<th>Action</th>
 		</tr>
 	</thead>
@@ -53,7 +68,7 @@
 	<ul class="pagination">
 		@for (int i = 1; i <= Model.totalPages; i++)
 		{
-			<li class="page-item"><a class="page-link" href="?page=@(i)&search=@(Model.search)">@i</a></li>
+			<li class="page-item"><a class="page-link" href="?page=@(i)&search=@(Model.search)&column=@Model.column&order=@Model.order">@i</a></li>
 		}
 	</ul>
 </nav>
