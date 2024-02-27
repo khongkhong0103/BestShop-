@@ -43,6 +43,12 @@ namespace BestShop.Pages.Admin.Books
 
         public string errorMessage = "";
         public string successMessage = "";
+
+        private IWebHostEnvironment environment;
+        public CreateModel(IWebHostEnvironment env)
+        {
+            environment = env;
+        }
         public void OnGet()
         {
         }
@@ -56,7 +62,7 @@ namespace BestShop.Pages.Admin.Books
             if (Description == null) Description = "";
 
             // save the image file on the server
-
+            string newFileName = DateTime.Now.ToString("yyyyMMddssfff");
             // save the new book in tha database
 
             successMessage = "Data saved correctly";
