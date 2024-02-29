@@ -48,7 +48,14 @@ namespace BestShop.Pages.Admin.Books
 
 		public string errorMessage = "";
 		public string successMessage = "";
-		public void OnGet()
+
+		public IWebHostEnvironment webHostEnvironment;
+
+        public EditModel(IWebHostEnvironment env)
+        {
+            webHostEnvironment = env;
+        }
+        public void OnGet()
         {
 			string requestId = Request.Query["id"];
 			try
@@ -99,8 +106,56 @@ namespace BestShop.Pages.Admin.Books
 			// successfull data validation 
 			if (Description== null)  Description = "";
 			// if we have a new ImageFile => upload the new image and delete thi old image 
+			string newFileName = ImageFileName;
+			if(ImageFile != null)
+			{
+				newFileName = DateTime.Now.ToString("yyyyMMddHHmmssfff");
+				newFileName += Path.GetExtension(ImageFile.FileName);
+				string imageFolder = webHostEnvironment.WebRootPath + "/images/books";
+				string imageFullPath = Path.Combine(imageFolder, newFileName);
+
+				using (var stream = System.IO.File.OpenWrite(imageFullPath))
+				{
+					ImageFile.CopyToAsync(stream);
+				}
+				// delete old image 
+				string oldImageFullPath = Path.Combine(imageFolder, ImageFileName);
+				System.IO.File.Delete(oldImageFullPath);
+                Console.WriteLine("Delete Image "+oldImageFullPath);
+            }
 			//update  the book data in the database 
+			try
+			{
+				string connectionString = "Data Source=DESKTOP-3CSJ4C0\\MSSQL;Initial Catalog=bestshop;Integrated Security=True";
+				using (SqlConnection connection = new SqlConnection(connectionString))
+				{
+					connection.Open();
+					string sql = "UPDATE  books SET title=@title, authors=@authors, isbn=@isbn, "+
+						"num_pages=@num_pages, price=@price, category=@category,"+
+						"description=@description , image_filename=@image_filename WHERE id=@id";
+					using (SqlCommand command = connection.CreateCommand())
+					{
+						command.Parameters.AddWithValue("@title", Title);
+						command.Parameters.AddWithValue("@authors",Authors);
+						command.Parameters.AddWithValue("@isbn",ISBN);
+						command.Parameters.AddWithValue("@num_pages",NumPages);
+						command.Parameters.AddWithValue("@price",Price);
+						command.Parameters.AddWithValue("@category",Category);
+						command.Parameters.AddWithValue("@description",Description);
+						command.Parameters.AddWithValue("@image_filename", newFileName);
+						command.Parameters.AddWithValue("@id",Id);
+						 command.ExecuteNonQuery();
+					}
+				}
+			}
+			catch(Exception ex)
+			{
+				errorMessage += ex.Message;
+				return;
+			}
+
 			successMessage = "Data saved correctly";
+			Response.Redirect("/Admin/Books/Index");
 		}
     }
 }
