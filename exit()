@@ -1,0 +1,101 @@
+[33mcommit 1ad1d626ab8c4acf32e50fed47493f40ba0e2cff[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Trong Tam <trongtam068@gmail.com>
+Date:   Thu Feb 29 22:47:24 2024 +0700
+
+    Edit Books - update image and database
+
+[33mcommit 5f0f40e564d964351c48877dca5650032ab59c66[m
+Author: Trong Tam <trongtam068@gmail.com>
+Date:   Wed Feb 28 22:13:25 2024 +0700
+
+    Edit Books - Create the Form
+
+[33mcommit 8f80f12443485f4bbaa180ea6ec4fa29ee60bba3[m
+Author: Trong Tam <trongtam068@gmail.com>
+Date:   Wed Feb 28 20:17:46 2024 +0700
+
+    Create Books - Insert Books in Database
+
+[33mcommit df1cd9cbf28b173ce7c811eca3dd7cebf2688c22[m
+Author: Trong Tam <trongtam068@gmail.com>
+Date:   Tue Feb 27 22:24:32 2024 +0700
+
+    Create Books - Upload images
+
+[33mcommit 533f8c63064a02f43c01b3b456acd7e584653217[m
+Author: Trong Tam <trongtam068@gmail.com>
+Date:   Mon Feb 26 22:45:02 2024 +0700
+
+    Create Books - Build the Form
+
+[33mcommit 1b137b8c60a03344fd1512402bee2aea807c192d[m
+Author: Trong Tam <trongtam068@gmail.com>
+Date:   Mon Feb 26 21:03:42 2024 +0700
+
+     Books - Add sort functionality
+
+[33mcommit 35c3e02492956472a1473f5bbb2d0332cb57a88d[m
+Author: Trong Tam <trongtam068@gmail.com>
+Date:   Thu Feb 22 21:44:05 2024 +0700
+
+    Books - Add pagination
+
+[33mcommit cf18bea340af7a437b12de7ffa20335d0b71c316[m
+Author: Trong Tam <trongtam068@gmail.com>
+Date:   Thu Feb 22 20:17:06 2024 +0700
+
+    Books - Add search functionality
+
+[33mcommit c14b60a2955a1a86beef946386a83269eebebd9e[m
+Author: Trong Tam <trongtam068@gmail.com>
+Date:   Wed Feb 21 21:02:17 2024 +0700
+
+    Books - List the books
+
+[33mcommit 7932e905033c5604060d485ed1ad6fad57f8cc9e[m
+Author: Trong Tam <trongtam068@gmail.com>
+Date:   Mon Feb 19 11:59:16 2024 +0700
+
+    Messages delete
+
+[33mcommit c533e46d1860c5b8b2d5a8b7b145d0cf5d27fd0c[m
+Author: Trong Tam <trongtam068@gmail.com>
+Date:   Mon Feb 19 11:38:53 2024 +0700
+
+    Messages details
+
+[33mcommit 68d3a9426c0dd35516a093a356cfb13090117b7f[m
+Author: Trong Tam <trongtam068@gmail.com>
+Date:   Mon Feb 19 11:01:05 2024 +0700
+
+    Messages - Add Table Pagination
+
+[33mcommit 1ef05698225962a4a3784a063d3922e3e6d33137[m
+Author: Trong Tam <trongtam068@gmail.com>
+Date:   Sun Feb 18 11:16:15 2024 +0700
+
+    Messages - List received messages
+
+[33mcommit 3a20c50629cd5ef3dff7034308078d5e0b3eb3d2[m
+Author: Trong Tam <trongtam068@gmail.com>
+Date:   Sun Feb 18 10:05:35 2024 +0700
+
+    SendEmail
+
+[33mcommit 3811679aaaf1dd6214a7d7caf7207c0e2e2b3bab[m
+Author: Trong Tam <trongtam068@gmail.com>
+Date:   Fri Feb 16 20:19:31 2024 +0700
+
+    Contact Form - Add Messages to Database
+
+[33mcommit e696d0f2700e6bd2c9beb30bb9dddc170a971ceb[m
+Author: Trong Tam <trongtam068@gmail.com>
+Date:   Fri Feb 16 18:02:59 2024 +0700
+
+    Contact Form - Validation using Attributes and Model Binding
+
+[33mcommit ee30b06e800c0e1f42844a1cba243bfd11e7040e[m
+Author: Trong Tam <trongtam068@gmail.com>
+Date:   Fri Feb 16 16:38:58 2024 +0700
+
+    first commit
