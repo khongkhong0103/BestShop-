@@ -69,7 +69,7 @@ namespace BestShop.Pages.Admin.Books
             string imageFullPath = Path.Combine(imageFolder, newFileName);
             using (var stream = System.IO.File.Create(imageFullPath))
             {
-                ImageFile.CopyToAsync(stream);
+                ImageFile.CopyTo(stream);
             }
             // save the new book in tha database
             try

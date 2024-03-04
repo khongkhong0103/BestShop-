@@ -116,7 +116,7 @@ namespace BestShop.Pages.Admin.Books
 
 				using (var stream = System.IO.File.OpenWrite(imageFullPath))
 				{
-					ImageFile.CopyToAsync(stream);
+					ImageFile.CopyTo(stream);
 				}
 				// delete old image 
 				string oldImageFullPath = Path.Combine(imageFolder, ImageFileName);
