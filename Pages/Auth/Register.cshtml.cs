@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
+using System.Data.SqlClient;
 
 namespace BestShop.Pages.Auth
 {
@@ -38,13 +40,47 @@ namespace BestShop.Pages.Auth
             }
             // successfull data validation 
             if (Phone == null) Phone = "";
-            //add the user details to the database 
+			//add the user details to the database 
+			string connectionString = "Data Source=DESKTOP-3CSJ4C0\\MSSQL;Initial Catalog=bestshop;Integrated Security=True";
+            try
+            {
+                using (SqlConnection  connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string sql = "INSERT INTO users"+
+                        "(firstname, lastname, email, phone, address, password, role) VALUES"+
+                        "(@firstname, @lastname, @email, @phone, @address, @password, 'client');";
 
+                    var passwordHasher = new PasswordHasher<IdentityUser>();
+                    string hashedPassword = passwordHasher.HashPassword(new IdentityUser(), Password);
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@firstname", Firstname);
+                        command.Parameters.AddWithValue("@lastname", Lastname);
+                        command.Parameters.AddWithValue("@email", Email);
+                        command.Parameters.AddWithValue("@phone", Phone);
+                        command.Parameters.AddWithValue("@address", Address);
+                        command.Parameters.AddWithValue("@password", hashedPassword);
+
+                        command.ExecuteNonQuery();
+                    };
+                }
+            }catch (Exception ex)
+            {
+                if (ex.Message.Contains(Email)) {
+                    errorMessage = "Email address already used";
+                }else
+                {
+					errorMessage = ex.Message;
+				}
+				return; 
+            }
             //send  confirmation email to the user 
 
-            //initialize the authenticated session => add the user details to the session data 
+			//initialize the authenticated session => add the user details to the session data 
 
-            successMessage = " Account created  successfully ";
+			successMessage = " Account created  successfully ";
         }
     }
 }
