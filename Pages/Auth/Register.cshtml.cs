@@ -1,3 +1,4 @@
+using BestShop.MyHelpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -77,7 +78,12 @@ namespace BestShop.Pages.Auth
 				return; 
             }
             //send  confirmation email to the user 
-
+            string username = Firstname + " " + Lastname;
+            string subject = "Account created successfully";
+            string message = "Dear "+username+"\n\n "+
+                "Your account has been created successfully.\n\n"+
+                "Best Resgards";
+            EmailSender.SendEmail(Email, username, subject, message).Wait();
 			//initialize the authenticated session => add the user details to the session data 
 
 			successMessage = " Account created  successfully ";
