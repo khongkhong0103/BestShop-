@@ -1,6 +1,7 @@
 using BestShop.MyHelpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
@@ -28,8 +29,18 @@ namespace BestShop.Pages.Auth
         public string ConfirmPassword { get; set; } = "";
         public string errorMessage = "";
         public string successMessage = "";
-      
-        public void OnGet()
+
+		//access control
+		public override void OnPageHandlerExecuting(PageHandlerExecutingContext context)
+		{
+			base.OnPageHandlerExecuting(context);
+            if (HttpContext.Session.GetString("role") != null)
+            {
+                // the user is already authen =>redirect  the user to the home page
+                context.Result = new RedirectResult("/");
+            }
+		}
+		public void OnGet()
         {
         }
         public void OnPost()
@@ -84,9 +95,51 @@ namespace BestShop.Pages.Auth
                 "Your account has been created successfully.\n\n"+
                 "Best Resgards";
             EmailSender.SendEmail(Email, username, subject, message).Wait();
-			//initialize the authenticated session => add the user details to the session data 
 
+			//initialize the authenticated session => add the user details to the session data 
+            try
+            {
+				using (SqlConnection connection = new SqlConnection(connectionString))
+				{
+                    connection.Open();
+                    string sql = "SELECT *FROM users WHERE email=@email";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@email", Email);
+                        using(SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if(reader.Read())
+                            {
+                                int id = reader.GetInt32(0);
+                                string firstname = reader.GetString(1);
+                                string lastname = reader.GetString(2);
+                                string email = reader.GetString(3);
+                                string phone = reader.GetString(4);
+                                string address = reader.GetString(5);
+                                //string hashedPassword = reader.GetString(6)
+                                string role = reader.GetString(7);
+                                string created_at = reader.GetDateTime(8).ToString("MM/dd/yyyy");
+
+                                HttpContext.Session.SetInt32("id", id);
+                                HttpContext.Session.SetString("firstname", firstname);
+                                HttpContext.Session.SetString("lastname", lastname);
+                                HttpContext.Session.SetString("email", email);
+                                HttpContext.Session.SetString("phone", phone);
+                                HttpContext.Session.SetString("address", address);
+                                HttpContext.Session.SetString("role", role);
+                                HttpContext.Session.SetString("created_at", created_at);
+                               
+                                }
+                        }
+                    }
+                }
+            }catch(Exception ex)
+            {
+                errorMessage = ex.Message;
+                return;
+            }
 			successMessage = " Account created  successfully ";
+            Response.Redirect("/");
         }
     }
 }
