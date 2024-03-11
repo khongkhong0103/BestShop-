@@ -1,3 +1,4 @@
+using BestShop.MyHelpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
@@ -5,6 +6,7 @@ using System.Data.SqlClient;
 
 namespace BestShop.Pages.Admin.Books
 {
+    [RequireAuth(RequiredRole ="admin")]
     public class CreateModel : PageModel
     {
         [BindProperty]

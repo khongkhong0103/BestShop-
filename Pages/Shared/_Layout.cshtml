@@ -49,6 +49,7 @@
                                     <li><a class="dropdown-item" asp-page="/Admin/Books/Index">Books</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" asp-page="/Index">Home</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Auth/Logout">Logout</a></li>
                                 </ul>
                             </li>
                         }else if (Context.Session.GetString("role").Equals("admin"))

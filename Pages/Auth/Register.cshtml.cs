@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 
 namespace BestShop.Pages.Auth
 {
+    [RequireNoAuthAtribute]
     [BindProperties]
     public class RegisterModel : PageModel
     {
@@ -31,15 +32,7 @@ namespace BestShop.Pages.Auth
         public string successMessage = "";
 
 		//access control
-		public override void OnPageHandlerExecuting(PageHandlerExecutingContext context)
-		{
-			base.OnPageHandlerExecuting(context);
-            if (HttpContext.Session.GetString("role") != null)
-            {
-                // the user is already authen =>redirect  the user to the home page
-                context.Result = new RedirectResult("/");
-            }
-		}
+	
 		public void OnGet()
         {
         }
