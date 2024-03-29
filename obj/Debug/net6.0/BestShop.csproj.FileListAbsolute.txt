@@ -35,7 +35,8 @@ C:\Users\84362\source\Project\BestShop\BestShop\bin\Debug\net6.0\runtimes\win-x8
 C:\Users\84362\source\Project\BestShop\BestShop\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\84362\source\Project\BestShop\BestShop\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\84362\source\Project\BestShop\BestShop\obj\Debug\net6.0\BestShop.csproj.AssemblyReference.cache
-C:\Users\84362\source\Project\BestShop\BestShop\obj\Debug\net6.0\BestShop.csproj.CopyComplete
 C:\Users\84362\source\Project\BestShop\BestShop\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\84362\source\Project\BestShop\BestShop\bin\Debug\net6.0\SendGrid.dll
 C:\Users\84362\source\Project\BestShop\BestShop\bin\Debug\net6.0\StarkbankEcdsa.dll
+C:\Users\84362\source\Project\BestShop\BestShop\obj\Debug\net6.0\BestShop.sourcelink.json
+C:\Users\84362\source\Project\BestShop\BestShop\obj\Debug\net6.0\BestShop.csproj.Up2Date
